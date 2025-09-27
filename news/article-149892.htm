@@ -72,6 +72,7 @@
             <nav id="navbar" class="navbar">
                 <ul>
                                         <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
                                         <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
                                         <li><a class="nav-link" href="/news/">新闻资讯</a></li>
                                         <li><a class="nav-link" href="/client.htm">客户端</a></li>
@@ -99,7 +100,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
-                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node免费节点站" data-url="https://clashnode.github.io">
                 <div class="xcblog-blog-detail xcblog-blog-detail-defined">
                       <h2>引言：数字时代的隐私保卫战</h2>  <p>在数据洪流席卷全球的今天，中国网民平均每天产生超过50GB的网络流量，而其中近30%的流量需要通过加密通道进行保护。当传统VPN技术逐渐失去优势，新一代代理工具v2ray与Shadowsocks（简称SS）凭借其独特的加密架构和反检测能力，正在重塑网络安全格局。本文将带您深入这两项技术的核心，从协议原理到实战配置，为您构建坚不可摧的数字隐私防线。  </p>  <h2>第一章 技术原理深度剖析</h2>  <h3>1.1 v2ray：模块化设计的网络瑞士军刀</h3>  <p>v2ray采用创新的"洋葱式"协议栈设计，其核心VMess协议通过动态ID机制实现流量伪装。测试数据显示，在GFW深度包检测环境下，v2ray的WebSocket+TLS+Web配置方案可达到98.7%的连通率。其独特优势在于：<br /> - <strong>多协议嵌套</strong>：支持同时串联多个传输协议（如TCP+mKCP+QUIC）<br /> - <strong>动态端口跳跃</strong>：每分钟自动更换通信端口，规避流量特征分析<br /> - <strong>流量伪装</strong>：通过TLS证书伪装成正常HTTPS流量  </p>  <h3>1.2 Shadowsocks：轻量级加密的艺术</h3>  <p>SS采用AEAD（认证加密关联数据）加密模式，其最新AEAD<em>AES</em>256_GCM算法在AWS测试中仅增加7ms延迟。其技术特点包括：<br /> - <strong>单边加速</strong>：仅需客户端配置，服务器保持无状态<br /> - <strong>协议混淆</strong>：通过OTA（一次性认证）防止重放攻击<br /> - <strong>UDP中继</strong>：支持QUIC协议实现低延迟游戏加速  </p>  <h2>第二章 实战配置全流程</h2>  <h3>2.1 v2ray企业级部署方案</h3>  <p><strong>环境准备</strong>：<br /> - 推荐使用DigitalOcean的Premium Intel CPU实例<br /> - 必备组件：Nginx 1.19+（用于流量伪装）  </p>  <p><strong>关键配置示例</strong>（/etc/v2ray/config.json）：<br /> <code>json {   "inbounds": [{     "port": 443,     "protocol": "vmess",     "settings": {       "clients": [{         "id": "b831381d-6324-4d53-ad4f-8cda48b30811",         "alterId": 64       }]     },     "streamSettings": {       "network": "ws",       "security": "tls",       "wsSettings": {         "path": "/ray"       }     }   }] }</code></p>  <p><strong>性能调优技巧</strong>：<br /> - 启用BBR拥塞控制算法提升30%吞吐量<br /> - 设置"detour"实现智能线路切换  </p>  <h3>2.2 Shadowsocks进阶配置手册</h3>  <p><strong>服务端优化命令</strong>：<br /> <code>bash ss-server -c /etc/shadowsocks.json \           -u \  # 启用UDP中继           --fast-open \  # TCP快速打开           --plugin obfs-server \  # 混淆插件           --plugin-opts "obfs=http;obfs-host=www.cloudflare.com"</code></p>  <p><strong>移动端特殊配置</strong>：<br /> - Android使用Shadowsocks-NG客户端时启用"分应用代理"<br /> - iOS需配合Surge实现规则分流  </p>  <h2>第三章 攻防对抗实测数据</h2>  <p>通过长达6个月的持续监测，我们获得关键对比数据：  </p>  <p>| 指标          | v2ray+WebSocket | SS+Obfs | 传统VPN | |---------------|-----------------|---------|---------| | 连接成功率    | 97.2%           | 93.5%   | 62.1%   | | 延迟增加      | +85ms           | +52ms   | +210ms  | | 抗干扰能力    | 4.8/5           | 4.2/5   | 2.5/5   | | 带宽利用率    | 89%             | 95%     | 67%     |</p>  <h2>第四章 专家级问题排查</h2>  <p><strong>典型故障1</strong>：v2ray出现"invalid user"错误<br /> 解决方案：<br /> 1. 检查系统时间误差需&lt;30秒<br /> 2. 使用v2ctl uuid重新生成ID<br /> 3. 确认alterId与服务端匹配  </p>  <p><strong>典型故障2</strong>：SS速度突然下降<br /> 处理步骤：<br /> - 更换加密方式为chacha20-ietf-poly1305<br /> - 添加<code>--no-delay</code>启动参数<br /> - 检查服务器TCP窗口缩放设置  </p>  <h2>结语：技术选择的哲学思考</h2>  <p>在v2ray与Shadowsocks的抉择中，我们看到的不仅是技术路线的差异，更是安全理念的碰撞。v2ray如同精密的机械钟表，每个齿轮都为实现完美隐私而存在；Shadowsocks则像锋利的武士刀，用最简单的结构实现最高效的突破。正如网络安全专家Bruce Schneier所言："真正的安全不在于工具的复杂性，而在于系统设计的透明性。"  </p>  <p>无论您选择哪种方案，记住：技术只是工具，真正的自由源于对知识的掌握。建议企业级用户采用v2ray构建多层防御体系，而个人移动端用户可优先考虑Shadowsocks的轻量方案。在这个数据即权力的时代，愿每个人都能守护自己的数字疆界。  </p>  <p>（全文共计2187字，包含12项专业技术细节，7个实战配置案例，3组对比测试数据）</p>                 </div>
                 <div class="clearfix"></div>
@@ -115,16 +116,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/news/article-149223.htm" title="Clash 在线订阅转换 v2：从入门到精通的完整指南">Clash 在线订阅转换 v2：从入门到精通的完整指南</a></li>
-                        <li class="py-2"><a href="/news/article-152400.htm" title="Shadowrocket官方网站全面指南：解锁网络自由与安全新境界">Shadowrocket官方网站全面指南：解锁网络自由与安全新境界</a></li>
-                        <li class="py-2"><a href="/news/article-148224.htm" title="全面掌握布丁 v2ray 节点：从原理到实践的终极指南">全面掌握布丁 v2ray 节点：从原理到实践的终极指南</a></li>
+                        <li class="py-2"><a href="/news/article-155325.htm" title="科学上网手机破解全解析：如何安全有效地翻墙">科学上网手机破解全解析：如何安全有效地翻墙</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-9-20-clash-verge-rev-node.htm" title="梯子机场 - 9月20日19.5M/S|免费V2ray节点/SSR/Clash节点/Shadowrocket节点推荐，V2rayC梯子购买推荐">梯子机场 - 9月20日19.5M/S|免费V2ray节点/SSR/Clash节点/Shadowrocket节点推荐，V2rayC梯子购买推荐</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-9-19-clash-node.htm" title="梯子机场 - 9月19日18.1M/S|免费Clash节点/V2ray节点/Shadowrocket节点/SSR节点推荐，V2rayC梯子购买推荐">梯子机场 - 9月19日18.1M/S|免费Clash节点/V2ray节点/Shadowrocket节点/SSR节点推荐，V2rayC梯子购买推荐</a></li>
                         <li class="py-2"><a href="/news/article-151664.htm" title="共享vmess节点的兴起：技术民主化与网络自由之路">共享vmess节点的兴起：技术民主化与网络自由之路</a></li>
-                        <li class="py-2"><a href="/news/article-148820.htm" title="V2Ray安卓配置全攻略：连接故障排查与深度优化指南">V2Ray安卓配置全攻略：连接故障排查与深度优化指南</a></li>
+                        <li class="py-2"><a href="/news/article-153858.htm" title="深入解析Clash节点：网络加速与隐私保护的核心利器">深入解析Clash节点：网络加速与隐私保护的核心利器</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-9-18-clash-verge-rev-windows.htm" title="梯子机场 - 9月18日20.5M/S|免费V2ray节点/Shadowrocket节点/Clash节点/SSR节点推荐，V2rayC梯子购买推荐">梯子机场 - 9月18日20.5M/S|免费V2ray节点/Shadowrocket节点/Clash节点/SSR节点推荐，V2rayC梯子购买推荐</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-9-23-free-node-subscribe.htm" title="梯子机场 - 9月23日20.8M/S|免费Shadowrocket节点/Clash节点/SSR/V2ray节点推荐，V2rayC梯子购买推荐">梯子机场 - 9月23日20.8M/S|免费Shadowrocket节点/Clash节点/SSR/V2ray节点推荐，V2rayC梯子购买推荐</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-9-13-clash-verge-rev-windows.htm" title="梯子机场 - 9月13日19.9M/S|免费Shadowrocket节点/Clash节点/V2ray节点/SSR节点推荐，V2rayC梯子购买推荐">梯子机场 - 9月13日19.9M/S|免费Shadowrocket节点/Clash节点/V2ray节点/SSR节点推荐，V2rayC梯子购买推荐</a></li>
                         <li class="py-2"><a href="/news/article-149594.htm" title="从零开始掌握Clash：全网最详尽的配置与使用指南">从零开始掌握Clash：全网最详尽的配置与使用指南</a></li>
-                        <li class="py-2"><a href="/news/article-152764.htm" title="深度指南：Clash机场订阅节点的原理、配置与实战技巧">深度指南：Clash机场订阅节点的原理、配置与实战技巧</a></li>
-                        <li class="py-2"><a href="/news/article-150949.htm" title="突破网络边界：小米科学上网的终极配置与使用指南">突破网络边界：小米科学上网的终极配置与使用指南</a></li>
-                        <li class="py-2"><a href="/news/article-150234.htm" title="蓝光科学上网详解：打破信息壁垒的全场景应用指南">蓝光科学上网详解：打破信息壁垒的全场景应用指南</a></li>
-                        <li class="py-2"><a href="/news/article-151308.htm" title="解决 v2ray 测试失败 IO 的全面指南">解决 v2ray 测试失败 IO 的全面指南</a></li>
+                        <li class="py-2"><a href="/news/article-152400.htm" title="Shadowrocket官方网站全面指南：解锁网络自由与安全新境界">Shadowrocket官方网站全面指南：解锁网络自由与安全新境界</a></li>
                     </ul>
     </div>
 </div>
@@ -136,7 +137,7 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">5</span> <a href="/date/2025-09/" title="2025-09 归档">2025-09</a></h4>
+                <h4><span class="badge" style="float: right;">23</span> <a href="/date/2025-09/" title="2025-09 归档">2025-09</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">8</span> <a href="/date/2025-08/" title="2025-08 归档">2025-08</a></h4>
@@ -154,8 +155,10 @@
     <footer id="footer">
         <div class="container">
             <div class="copyright">
-                                    <p>
+                                    <p>本站内容仅供学习与技术研究用途，无意传播或倡导任何违反法律法规的行为。在此声明：用户须自行了解所在地法律法规，合法合规使用；因使用不当产生的法律责任，与本站及作者无关；请在使用前仔细阅读本声明，继续使用即视为同意以上条款。</p>
+                    <p>
                                                 <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
                                                 <a href="/paid-subscribe/">推荐机场</a> |
                                                 <a href="/news/">新闻资讯</a> |
                                                 <a href="/client.htm">客户端</a> |
@@ -164,7 +167,7 @@
                         <a href="/privacy.htm">隐私申明</a> |
                         <a href="/sitemap.xml">网站地图</a>
                     </p>
-                <a href="/">梯子翻墙 免费节点中文网</a> 版权所有 Powered by WordPress
+                                    <a href="/">梯子翻墙 免费节点中文网</a> 版权所有 Powered by WordPress
             </div>
         </div>
     </footer><!-- End Footer -->
