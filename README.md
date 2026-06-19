@@ -1,4 +1,4 @@
-# 梯子机场 - 6月12日20.2M/S|免费Clash节点/V2ray节点/Shadowrocket节点/Singbox节点/SSR节点节点推荐，V2rayC梯子购买推荐  更新时间 2026-06-12 08:44:32
+# 梯子机场 - 6月19日21.4M/S|免费Shadowrocket节点/Singbox节点/V2ray节点/Clash节点/SSR节点节点推荐，V2rayC梯子购买推荐  更新时间 2026-06-19 08:59:27
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://tizifanqiang.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
@@ -9,23 +9,23 @@
 
 ### 免费Clash节点订阅链接
 
-- https://tizifanqiang.github.io/uploads/2026/06/0-20260612.yaml
-- https://tizifanqiang.github.io/uploads/2026/06/1-20260612.yaml
-- https://tizifanqiang.github.io/uploads/2026/06/2-20260612.yaml
-- https://tizifanqiang.github.io/uploads/2026/06/3-20260612.yaml
-- https://tizifanqiang.github.io/uploads/2026/06/4-20260612.yaml
+- https://tizifanqiang.github.io/uploads/2026/06/0-20260619.yaml
+- https://tizifanqiang.github.io/uploads/2026/06/1-20260619.yaml
+- https://tizifanqiang.github.io/uploads/2026/06/2-20260619.yaml
+- https://tizifanqiang.github.io/uploads/2026/06/3-20260619.yaml
+- https://tizifanqiang.github.io/uploads/2026/06/4-20260619.yaml
 
 ### 免费V2ray节点订阅链接
 
-- https://tizifanqiang.github.io/uploads/2026/06/0-20260612.txt
-- https://tizifanqiang.github.io/uploads/2026/06/1-20260612.txt
-- https://tizifanqiang.github.io/uploads/2026/06/2-20260612.txt
-- https://tizifanqiang.github.io/uploads/2026/06/3-20260612.txt
-- https://tizifanqiang.github.io/uploads/2026/06/4-20260612.txt
+- https://tizifanqiang.github.io/uploads/2026/06/0-20260619.txt
+- https://tizifanqiang.github.io/uploads/2026/06/1-20260619.txt
+- https://tizifanqiang.github.io/uploads/2026/06/2-20260619.txt
+- https://tizifanqiang.github.io/uploads/2026/06/3-20260619.txt
+- https://tizifanqiang.github.io/uploads/2026/06/4-20260619.txt
 
 ### 免费Sing-box节点订阅链接
 
-- https://tizifanqiang.github.io/uploads/2026/06/20260612.json
+- https://tizifanqiang.github.io/uploads/2026/06/20260619.json
 
 ## 更多Clash节点订阅 ：
 
